@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "EFCoreRelationshipsTutorial": {
+    "EFCoreRelation": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

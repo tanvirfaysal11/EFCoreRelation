@@ -1,4 +1,4 @@
-﻿namespace EFCoreRelationshipsTutorial
+﻿namespace EFCoreRelation
 {
     public class CreateCharacterDto
     {

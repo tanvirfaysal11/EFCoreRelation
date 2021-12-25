@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EFCoreRelation.DTO;
+using Microsoft.AspNetCore.Mvc;
 
-namespace EFCoreRelationshipsTutorial.Controllers
+namespace EFCoreRelation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,7 +13,6 @@ namespace EFCoreRelationshipsTutorial.Controllers
         {
             _context = context;
         }
-
         [HttpGet]
         public async Task<ActionResult<List<Character>>> Get(int userId)
         {
@@ -24,8 +24,20 @@ namespace EFCoreRelationshipsTutorial.Controllers
 
             return characters;
         }
+        [HttpPost("user")]
+        public async Task<ActionResult<List<User>>> Create(AddNewUserDto request)
+        {
+            var item = await _context.Users.FindAsync(request.Id);
+            var newuser = new User
+            {
+                Username = request.Username,
+            };
+            _context.Users.Add(newuser);
+            await _context.SaveChangesAsync();
+            return Ok(newuser);
+        }
 
-        [HttpPost]
+        [HttpPost("character")]
         public async Task<ActionResult<List<Character>>> Create(CreateCharacterDto request)
         {
             var user = await _context.Users.FindAsync(request.UserId);
@@ -44,7 +56,6 @@ namespace EFCoreRelationshipsTutorial.Controllers
 
             return await Get(newCharacter.UserId);
         }
-
         [HttpPost("weapon")]
         public async Task<ActionResult<Character>> AddWeapon(AddWeaponDto request)
         {
@@ -58,13 +69,11 @@ namespace EFCoreRelationshipsTutorial.Controllers
                 Damage = request.Damage,
                 Character = character
             };
-
             _context.Weapons.Add(newWeapon);
             await _context.SaveChangesAsync();
 
             return character;
         }
-
         [HttpPost("skill")]
         public async Task<ActionResult<Character>> AddCharacterSkill(AddCharacterSkillDto request)
         {

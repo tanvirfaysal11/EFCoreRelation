@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EFCoreRelationshipsTutorial.Data
+namespace EFCoreRelation.Data
 {
     public class DataContext : DbContext
     {
@@ -16,5 +17,20 @@ namespace EFCoreRelationshipsTutorial.Data
         public DbSet<Weapon> Weapons { get; set; }
 
         public DbSet<Skill> Skills { get; set; }
+        //    protected void OnModelCreating(ModelBuilder modelBuilder)
+        //    {
+        //        modelBuilder.ApplyConfiguration(new CharacterConfig());
+
+        //    }
+        //}
+        //public class CharacterConfig : IEntityTypeConfiguration<Character>
+        //{
+        //    public void Configure(EntityTypeBuilder<Character> builder)
+        //    {
+        //        builder.HasKey(x => x.Id);
+        //        builder.Property(x => x.Name);
+
+        //    }
     }
+
 }

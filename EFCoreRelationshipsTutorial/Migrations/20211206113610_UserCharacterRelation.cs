@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace EFCoreRelationshipsTutorial.Migrations
+namespace EFCoreRelation.Migrations
 {
     public partial class UserCharacterRelation : Migration
     {
