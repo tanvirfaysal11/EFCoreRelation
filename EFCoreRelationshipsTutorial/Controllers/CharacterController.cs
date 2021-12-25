@@ -24,19 +24,19 @@ namespace EFCoreRelation.Controllers
 
             return characters;
         }
-        [HttpPost("user")]
-        public async Task<ActionResult<List<User>>> Create(AddNewUserDto request)
-        {
-            var item = await _context.Users.FindAsync(request.Id);
-            var newuser = new User
-            {
-                Username = request.Username
+        //[HttpPost("user")]
+        //public async Task<ActionResult<List<User>>> Create(AddNewUserDto request)
+        //{
+        //    var item = await _context.Users.FindAsync(request.Id);
+        //    var newuser = new User
+        //    {
+        //        Username = request.Username
                 
-            };
-            _context.Users.Add(newuser);
-            await _context.SaveChangesAsync();
-            return Ok(await _context.Users.ToListAsync());
-        }
+        //    };
+        //    _context.Users.Add(newuser);
+        //    await _context.SaveChangesAsync();
+        //    return Ok(await _context.Users.ToListAsync());
+        //}
         [HttpDelete("userDelete")]
         public async Task<ActionResult<List<User>>> Delete(int Id)
         {

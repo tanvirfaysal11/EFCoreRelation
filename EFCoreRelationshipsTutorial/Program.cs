@@ -1,5 +1,7 @@
 global using EFCoreRelation.Data;
 global using Microsoft.EntityFrameworkCore;
+using EFCoreRelation.Repository;
+using EFCoreRelation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Configure the Repository Pattern.
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
