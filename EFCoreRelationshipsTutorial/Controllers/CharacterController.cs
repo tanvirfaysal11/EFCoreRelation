@@ -30,11 +30,22 @@ namespace EFCoreRelation.Controllers
             var item = await _context.Users.FindAsync(request.Id);
             var newuser = new User
             {
-                Username = request.Username,
+                Username = request.Username
+                
             };
             _context.Users.Add(newuser);
             await _context.SaveChangesAsync();
-            return Ok(newuser);
+            return Ok(await _context.Users.ToListAsync());
+        }
+        [HttpDelete("userDelete")]
+        public async Task<ActionResult<List<User>>> Delete(int Id)
+        {
+            var user = await _context.Users.FindAsync(Id);
+            if (user == null)
+                return BadRequest("Id Not Found");
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.Users.ToListAsync());
         }
 
         [HttpPost("character")]
