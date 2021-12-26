@@ -24,44 +24,19 @@ namespace EFCoreRelation.Controllers
 
             return characters;
         }
-        //[HttpPost("user")]
-        //public async Task<ActionResult<List<User>>> Create(AddNewUserDto request)
-        //{
-        //    var item = await _context.Users.FindAsync(request.Id);
-        //    var newuser = new User
-        //    {
-        //        Username = request.Username
-                
-        //    };
-        //    _context.Users.Add(newuser);
-        //    await _context.SaveChangesAsync();
-        //    return Ok(await _context.Users.ToListAsync());
-        //}
-        [HttpDelete("userDelete")]
-        public async Task<ActionResult<List<User>>> Delete(int Id)
-        {
-            var user = await _context.Users.FindAsync(Id);
-            if (user == null)
-                return BadRequest("Id Not Found");
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return Ok(await _context.Users.ToListAsync());
-        }
-
+    
         [HttpPost("character")]
         public async Task<ActionResult<List<Character>>> Create(CreateCharacterDto request)
         {
             var user = await _context.Users.FindAsync(request.UserId);
-            if(user == null)
+            if (user == null)
                 return NotFound();
-
             var newCharacter = new Character
             {
                 Name = request.Name,
                 RpgClass = request.RpgClass,
                 User = user
             };
-
             _context.Characters.Add(newCharacter);
             await _context.SaveChangesAsync();
 

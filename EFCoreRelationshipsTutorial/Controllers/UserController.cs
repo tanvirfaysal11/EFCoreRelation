@@ -14,11 +14,23 @@ namespace EFCoreRelation.Controllers
         {
             _userRepository = userRepository;
         }
-        [HttpPost]
+        [HttpPost("AddNewUser")]
         public async Task<ActionResult<List<User>>> Post(AddNewUserDto user)
         {
             return (await _userRepository.AddUser(user));
+        }  
+
+        [HttpGet]
+        public async Task<ActionResult<List<Character>>> GetUser(int userId)
+        {
+            return (await _userRepository.GetUser(userId));
         }
+        [HttpDelete("UserDelete")]
+        public async Task<ActionResult<List<User>>> DeleteUser(int Id)
+        {
+            return (await _userRepository.DeleteUser(Id));
+        }
+        
 
     }
 }
